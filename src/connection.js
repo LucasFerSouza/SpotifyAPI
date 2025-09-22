@@ -1,17 +1,15 @@
-import dotenv from 'dotenv';  // Importa dotenv para carregar as variáveis do .env
-import { Pool } from 'pg';  // Importa Pool (classe para gerenciar conexões PostgreSQL)
+import dotenv from "dotenv";
+import pkg from "pg";
+const { Pool } = pkg;
 
-dotenv.config();  // Carrega variáveis do arquivo .env
+dotenv.config();
 
-// Cria um pool de conexões com PostgreSQL usando os dados do .env
 const pool = new Pool({
-  host: process.env.DB_HOST,       // Endereço do servidor PostgreSQL
-  port: process.env.DB_PORT,       // Porta do PostgreSQL (padrão 5432)
-  user: process.env.DB_USER,       // Usuário do banco
-  password: process.env.DB_PASSWORD,  // Senha do banco
-  database: process.env.DB_NAME    // Nome do banco
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
-// Exporta o pool usando ES Modules
 export default pool;
-

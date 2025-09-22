@@ -1,14 +1,16 @@
 import express from "express";
-import spotifyRouter from "./spotify.js";
-import musicRouter from ".";
+import importList from "../controller/importList.js";
+import latestSongs from "../controller/latestSongs.js";
+import insertSong from "../controller/insertSong.js";
+import updateSong from "../controller/updateSong.js";
+import deleteSong from "../controller/deleteSong.js";
 
 const router = express.Router();
 
-// Health check
-router.get("/", (_, res) => res.json({ message: "API funcionando 🚀" }));
-
-// Agrupamento de rotas
-router.use("/spotify", spotifyRouter);  // → /spotify/import , /spotify/latest
-router.use("/music", musicRouter);      // → /music/tracks , /music/latest
+router.get("/import", importList);       // Importa músicas e salva no banco
+router.get("/latest", latestSongs);      // Lista últimas 10 músicas
+router.post("/tracks", insertSong);      // Insert manual
+router.put("/tracks/:id", updateSong);   // Update manual
+router.delete("/tracks/:id", deleteSong);// Delete manual
 
 export default router;
